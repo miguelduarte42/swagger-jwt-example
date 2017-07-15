@@ -9,13 +9,13 @@ var swaggerConfig = YAML.load("./api/swagger/swagger.yaml");
 swaggerTools.initializeMiddleware(swaggerConfig, function(middleware) {
   //Serves the Swagger UI on /docs
   app.use(middleware.swaggerUi());
-  app.use(middleware.swaggerMetadata());
   app.use(
     middleware.swaggerSecurity({
       //manage token function in the 'auth' module
       Bearer: auth.verifyToken
     })
   );
+  app.use(middleware.swaggerMetadata()); // needs to go after swaggerSecurity, otherwise using 'Authorization' header from swagger api_key doesn't authenticate properly
 
   var routerConfig = {
     controllers: "./api/controllers",

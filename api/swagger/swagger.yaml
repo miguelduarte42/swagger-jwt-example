@@ -111,8 +111,10 @@ definitions:
     properties:
       username:
         type: string
+        example: "username"
       password:
         type: string
+        example: "password"
   Resource:
     type: object
     properties:
